@@ -1,3 +1,4 @@
+import Game from "../../Game/Game";
 import type { IFrameInSprite, IPosition, ISize } from "../../utils/type";
 import ImageObject from "./ImageObject";
 
@@ -5,9 +6,11 @@ export default class ImageSpriteObject extends ImageObject {
   frameInSprite: Array<IFrameInSprite>;
   sourcePosition: IPosition;
   sourceSize: ISize;
+  game: Game;
 
-  constructor() {
+  constructor(game: Game) {
     super();
+    this.game = game;
     this.sourcePosition = { x: 0, y: 0 };
     this.sourceSize = { width: 0, height: 0 };
     this.frameInSprite = [];
@@ -71,8 +74,8 @@ export default class ImageSpriteObject extends ImageObject {
     this.frameInSprite = JSON.parse(JSON.stringify(frameInSprite));
   }
   destroy() {
-    // this.game.arrayDrawImageSprite = Add.SArrayDrawImageFromSprite.filter(
-    //   (_e) => _e.key !== this.key
-    // );
+    this.game.arrayDrawImageSprite = this.game.arrayDrawImageSprite.filter(
+      (_e) => _e.key !== this.key
+    );
   }
 }

@@ -6,8 +6,8 @@ import ImageSpriteObject from "../GameEngine/GameObject/image/ImageSpriteObject"
 
 export default class ScenesOver extends Scene {
   bgGameOver: RectangleObject = new RectangleObject();
-  btnRestart: ImageSpriteObject = new ImageSpriteObject();
-  txtGameOver: ImageSpriteObject = new ImageSpriteObject();
+  btnRestart: ImageSpriteObject = new ImageSpriteObject(this.game);
+  txtGameOver: ImageSpriteObject = new ImageSpriteObject(this.game);
   textScore: TextObject = new TextObject();
   textHeightScore: TextObject = new TextObject();
   score: number = 0;

@@ -16,8 +16,9 @@ exports.__esModule = true;
 var ImageObject_1 = require("./ImageObject");
 var ImageSpriteObject = /** @class */ (function (_super) {
     __extends(ImageSpriteObject, _super);
-    function ImageSpriteObject() {
+    function ImageSpriteObject(game) {
         var _this = _super.call(this) || this;
+        _this.game = game;
         _this.sourcePosition = { x: 0, y: 0 };
         _this.sourceSize = { width: 0, height: 0 };
         _this.frameInSprite = [];
@@ -78,9 +79,8 @@ var ImageSpriteObject = /** @class */ (function (_super) {
         this.frameInSprite = JSON.parse(JSON.stringify(frameInSprite));
     };
     ImageSpriteObject.prototype.destroy = function () {
-        // this.game.arrayDrawImageSprite = Add.SArrayDrawImageFromSprite.filter(
-        //   (_e) => _e.key !== this.key
-        // );
+        var _this = this;
+        this.game.arrayDrawImageSprite = this.game.arrayDrawImageSprite.filter(function (_e) { return _e.key !== _this.key; });
     };
     return ImageSpriteObject;
 }(ImageObject_1["default"]));

@@ -20,7 +20,7 @@ export default class LoadObject {
     url: string,
     frameInSprite: Array<IFrameInSprite>
   ) {
-    let _imageSpriteTemp = new ImageSpriteObject();
+    let _imageSpriteTemp = new ImageSpriteObject(this.game);
     _imageSpriteTemp.nameImage = nameImage;
     _imageSpriteTemp.image.src = url;
     _imageSpriteTemp.frameInSprite = frameInSprite;

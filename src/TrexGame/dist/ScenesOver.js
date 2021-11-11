@@ -22,8 +22,8 @@ var ScenesOver = /** @class */ (function (_super) {
     function ScenesOver(game) {
         var _this = _super.call(this, "over", game) || this;
         _this.bgGameOver = new RectangleObject_1["default"]();
-        _this.btnRestart = new ImageSpriteObject_1["default"]();
-        _this.txtGameOver = new ImageSpriteObject_1["default"]();
+        _this.btnRestart = new ImageSpriteObject_1["default"](_this.game);
+        _this.txtGameOver = new ImageSpriteObject_1["default"](_this.game);
         _this.textScore = new TextObject_1["default"]();
         _this.textHeightScore = new TextObject_1["default"]();
         _this.score = 0;

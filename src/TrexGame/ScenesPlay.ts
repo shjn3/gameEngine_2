@@ -3,7 +3,6 @@ import Scene from "../GameEngine/Scenes/Scene";
 import ImageObject from "../GameEngine/GameObject/image/ImageObject";
 import ImageAnimationObject from "../GameEngine/GameObject/image/ImageAnimationObject";
 import ImageSpriteObject from "../GameEngine/GameObject/image/ImageSpriteObject";
-import TextObject from "../GameEngine/GameObject/text/TextObject";
 
 export default class ScenesPlay extends Scene {
   btnStart: ImageObject = new ImageObject();
@@ -12,8 +11,6 @@ export default class ScenesPlay extends Scene {
   velocity: number = -3;
   jumpVelocity: number = -13;
 
-  textScore: TextObject = new TextObject();
-  textHightScore: TextObject = new TextObject();
   heightScore: number = 0;
   score: number = 0;
 
@@ -171,7 +168,7 @@ export default class ScenesPlay extends Scene {
     for (let i = 0; i < 5; i++) {
       this.arrayUnitScore.push(
         this.game.add.imageSprite(
-          700 + 20 * i,
+          650 + 20 * i,
           20,
           15,
           15,
@@ -182,12 +179,12 @@ export default class ScenesPlay extends Scene {
     }
   }
   createHeightScore() {
-    this.game.add.imageSprite(510, 20, 30, 15, "mainSprite", "HI");
+    this.game.add.imageSprite(460, 20, 30, 15, "mainSprite", "HI");
 
     for (let i = 0; i < 5; i++) {
       this.arrayUnitHeightScore.push(
         this.game.add.imageSprite(
-          550 + 20 * i,
+          500 + 20 * i,
           20,
           15,
           15,
@@ -197,17 +194,6 @@ export default class ScenesPlay extends Scene {
       );
     }
     this.updateUnit(this.heightScore, this.arrayUnitHeightScore);
-  }
-
-  createTextScore() {
-    this.textScore = this.game.add.text(600, 30, "Score: 0", "Arial", 20);
-    this.textHightScore = this.game.add.text(
-      600,
-      60,
-      `Hight Score: ${this.heightScore}`,
-      "Arial",
-      20
-    );
   }
   createGround() {
     this.arrGround.push(

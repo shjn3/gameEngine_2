@@ -87,8 +87,9 @@ var ImageAnimationObject = /** @class */ (function (_super) {
         }
     };
     ImageAnimationObject.prototype.destroy = function () {
-        // gameObject.arrayDrawImageAnimation =
-        //   gameObject.arrayDrawImageAnimation.filter((_e) => _e.key !== this.key);
+        var _this = this;
+        this.game.arrayDrawImageAnimation =
+            this.game.arrayDrawImageAnimation.filter(function (_e) { return _e.key !== _this.key; });
     };
     return ImageAnimationObject;
 }(BaseObject_1["default"]));

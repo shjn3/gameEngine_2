@@ -35,7 +35,7 @@ var AddObject = /** @class */ (function () {
         return temp;
     };
     AddObject.prototype.imageSprite = function (x, y, width, height, nameImage, keyFrame) {
-        var temp = new ImageSpriteObject_1["default"]();
+        var temp = new ImageSpriteObject_1["default"](this.game);
         var _imageSpriteAddTemp = this.game.arrayImageSprite.filter(function (_e) { return _e.nameImage === nameImage; });
         if (_imageSpriteAddTemp[0]) {
             if (_imageSpriteAddTemp[0].frameInSprite.length > 0) {

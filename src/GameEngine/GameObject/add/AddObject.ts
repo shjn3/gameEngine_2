@@ -57,7 +57,7 @@ export default class AddObject {
     nameImage: string,
     keyFrame: string
   ) {
-    let temp = new ImageSpriteObject();
+    let temp = new ImageSpriteObject(this.game);
     let _imageSpriteAddTemp = this.game.arrayImageSprite.filter(
       (_e) => _e.nameImage === nameImage
     );

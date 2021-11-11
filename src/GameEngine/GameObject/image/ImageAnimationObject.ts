@@ -111,7 +111,7 @@ export default class ImageAnimationObject extends BaseObject {
   }
 
   destroy() {
-    // gameObject.arrayDrawImageAnimation =
-    //   gameObject.arrayDrawImageAnimation.filter((_e) => _e.key !== this.key);
+    this.game.arrayDrawImageAnimation =
+      this.game.arrayDrawImageAnimation.filter((_e) => _e.key !== this.key);
   }
 }

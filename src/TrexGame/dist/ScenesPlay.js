@@ -16,7 +16,6 @@ exports.__esModule = true;
 var Scene_1 = require("../GameEngine/Scenes/Scene");
 var ImageObject_1 = require("../GameEngine/GameObject/image/ImageObject");
 var ImageAnimationObject_1 = require("../GameEngine/GameObject/image/ImageAnimationObject");
-var TextObject_1 = require("../GameEngine/GameObject/text/TextObject");
 var ScenesPlay = /** @class */ (function (_super) {
     __extends(ScenesPlay, _super);
     function ScenesPlay(game) {
@@ -25,8 +24,6 @@ var ScenesPlay = /** @class */ (function (_super) {
         _this.timer = 0;
         _this.velocity = -3;
         _this.jumpVelocity = -13;
-        _this.textScore = new TextObject_1["default"]();
-        _this.textHightScore = new TextObject_1["default"]();
         _this.heightScore = 0;
         _this.score = 0;
         _this.gameOver = false;
@@ -173,19 +170,15 @@ var ScenesPlay = /** @class */ (function (_super) {
     };
     ScenesPlay.prototype.createScore = function () {
         for (var i = 0; i < 5; i++) {
-            this.arrayUnitScore.push(this.game.add.imageSprite(700 + 20 * i, 20, 15, 15, "mainSprite", "numberZero"));
+            this.arrayUnitScore.push(this.game.add.imageSprite(650 + 20 * i, 20, 15, 15, "mainSprite", "numberZero"));
         }
     };
     ScenesPlay.prototype.createHeightScore = function () {
-        this.game.add.imageSprite(510, 20, 30, 15, "mainSprite", "HI");
+        this.game.add.imageSprite(460, 20, 30, 15, "mainSprite", "HI");
         for (var i = 0; i < 5; i++) {
-            this.arrayUnitHeightScore.push(this.game.add.imageSprite(550 + 20 * i, 20, 15, 15, "mainSprite", "numberZero"));
+            this.arrayUnitHeightScore.push(this.game.add.imageSprite(500 + 20 * i, 20, 15, 15, "mainSprite", "numberZero"));
         }
         this.updateUnit(this.heightScore, this.arrayUnitHeightScore);
-    };
-    ScenesPlay.prototype.createTextScore = function () {
-        this.textScore = this.game.add.text(600, 30, "Score: 0", "Arial", 20);
-        this.textHightScore = this.game.add.text(600, 60, "Hight Score: " + this.heightScore, "Arial", 20);
     };
     ScenesPlay.prototype.createGround = function () {
         this.arrGround.push(this.game.add.imageSprite(0, 320, 1600, 30, "mainSprite", "ground"));

@@ -14,7 +14,7 @@ var LoadObject = /** @class */ (function () {
         return _imageTemp;
     };
     LoadObject.prototype.imageSprite = function (nameImage, url, frameInSprite) {
-        var _imageSpriteTemp = new ImageSpriteObject_1["default"]();
+        var _imageSpriteTemp = new ImageSpriteObject_1["default"](this.game);
         _imageSpriteTemp.nameImage = nameImage;
         _imageSpriteTemp.image.src = url;
         _imageSpriteTemp.frameInSprite = frameInSprite;
