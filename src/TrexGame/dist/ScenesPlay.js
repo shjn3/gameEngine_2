@@ -168,6 +168,7 @@ var ScenesPlay = /** @class */ (function (_super) {
         this.createScore();
         this.createEvent();
     };
+    //create Score
     ScenesPlay.prototype.createScore = function () {
         for (var i = 0; i < 5; i++) {
             this.arrayUnitScore.push(this.game.add.imageSprite(650 + 20 * i, 20, 15, 15, "mainSprite", "numberZero"));
@@ -180,10 +181,12 @@ var ScenesPlay = /** @class */ (function (_super) {
         }
         this.updateUnit(this.heightScore, this.arrayUnitHeightScore);
     };
+    //create ground
     ScenesPlay.prototype.createGround = function () {
         this.arrGround.push(this.game.add.imageSprite(0, 320, 1600, 30, "mainSprite", "ground"));
         this.arrGround.push(this.game.add.imageSprite(1600, 320, 1600, 30, "mainSprite", "ground"));
     };
+    //create Player
     ScenesPlay.prototype.createPlayer = function () {
         this.player = this.game.add.spriteSheet(15, 290, 60, 70);
         var configRunPlayer = {
@@ -224,8 +227,8 @@ var ScenesPlay = /** @class */ (function (_super) {
         this.game.animation.create(configDiePlayer);
         this.player.play("RunPlayer");
     };
+    //create Event
     ScenesPlay.prototype.createEvent = function () {
-        //add event
         var _this = this;
         this.game.input.keyboard.addKeyDown(" ", function () {
             if (_this.player.nameAnimation === "RunPlayer")
@@ -237,21 +240,22 @@ var ScenesPlay = /** @class */ (function (_super) {
         });
         this.game.input.keyboard.addKeyDown("ArrowDown", function () {
             if (_this.player.nameAnimation === "RunPlayer") {
-                _this.player.position.y = 295;
-                _this.player.size.width = 70;
-                _this.player.size.height = 55;
+                _this.player.setPositionY(295);
+                _this.player.setWidth(70);
+                _this.player.setHeight(55);
                 _this.player.play("DuckPlayer");
             }
         });
         this.game.input.keyboard.addKeyUp("ArrowDown", function () {
             if (_this.player.nameAnimation === "DuckPlayer") {
-                _this.player.position.y = 290;
-                _this.player.size.width = 60;
-                _this.player.size.height = 70;
+                _this.player.setPositionY(290);
+                _this.player.setWidth(60);
+                _this.player.setHeight(70);
                 _this.player.play("RunPlayer");
             }
         });
     };
+    //create Obstacles
     ScenesPlay.prototype.createObstacles = function () {
         var configObstaclesPterodactyl = {
             key: "PTerodactyl",
@@ -287,7 +291,7 @@ var ScenesPlay = /** @class */ (function (_super) {
             this.updateOverGame();
         }
     };
-    ScenesPlay.prototype.updateHeightScore = function () { };
+    //update Image Unit for Score and hight score
     ScenesPlay.prototype.updateUnit = function (valueScore, arrayScore) {
         var temp = valueScore.toString().split("");
         var lengthTemp = temp.length;
@@ -300,6 +304,7 @@ var ScenesPlay = /** @class */ (function (_super) {
             }
         }
     };
+    //update Game Over
     ScenesPlay.prototype.updateOverGame = function () {
         this.updateHeightScoreValue();
         this.game.changeScenes("over", {
@@ -321,20 +326,23 @@ var ScenesPlay = /** @class */ (function (_super) {
         this.score = 0;
         this.timer = 0;
     };
+    //update Ground
     ScenesPlay.prototype.updateGround = function () {
         if (this.arrGround.length > 0) {
-            this.arrGround[0].position.x += this.velocity;
-            this.arrGround[1].position.x += this.velocity;
-            if (this.arrGround[0].position.x < -1600) {
+            this.arrGround[0].setPositionX(this.arrGround[0].getPositionX() + this.velocity);
+            this.arrGround[1].setPositionX(this.arrGround[1].getPositionX() + this.velocity);
+            if (this.arrGround[0].getPositionX() < -1600) {
                 this.arrGround[0].destroy();
                 this.arrGround.splice(0, 1);
                 this.arrGround.push(this.game.add.imageSprite(1600, 320, 1600, 30, "mainSprite", "ground"));
             }
         }
     };
+    //update HeightScore value
     ScenesPlay.prototype.updateHeightScoreValue = function () {
         this.heightScore = Math.max(this.heightScore, this.score);
     };
+    //update Score value
     ScenesPlay.prototype.updateScoreValue = function () {
         this.timer++;
         if (this.timer > 50) {
@@ -345,9 +353,9 @@ var ScenesPlay = /** @class */ (function (_super) {
     //update Obstacles
     ScenesPlay.prototype.updateObstacles = function () {
         this.updatePositionObstacles();
-        var getSumPositionAndWidthLastObstacles = this.getSumPositionAndWidthLastObstacles();
+        var sumPositionAndWidthLastObstacles = this.sumPositionAndWidthLastObstacles();
         var randomGap = this.getRandom(300, 600);
-        if (getSumPositionAndWidthLastObstacles + randomGap < 800) {
+        if (sumPositionAndWidthLastObstacles + randomGap < 800) {
             var randomType = this.getRandom(1, 2); //1 cactus 2 pterodactyl
             switch (randomType) {
                 case 1:
@@ -369,51 +377,58 @@ var ScenesPlay = /** @class */ (function (_super) {
         }
         this.decreaseObstacles();
     };
-    ScenesPlay.prototype.getSumPositionAndWidthLastObstacles = function () {
+    //
+    ScenesPlay.prototype.sumPositionAndWidthLastObstacles = function () {
         var lengthCactus = this.obstaclesCactus.length;
         var lengthPterodactyl = this.obstaclesPTerodactyl.length;
         if (lengthCactus > 0 && lengthPterodactyl > 0) {
-            return Math.max(this.obstaclesCactus[lengthCactus - 1].position.x +
-                this.obstaclesCactus[lengthCactus - 1].size.width, this.obstaclesPTerodactyl[lengthPterodactyl - 1].position.x +
-                this.obstaclesPTerodactyl[lengthPterodactyl - 1].size.width);
+            return Math.max(this.obstaclesCactus[lengthCactus - 1].getPositionX() +
+                this.obstaclesCactus[lengthCactus - 1].getWidth(), this.obstaclesPTerodactyl[lengthPterodactyl - 1].getPositionX() +
+                this.obstaclesPTerodactyl[lengthPterodactyl - 1].getWidth());
         }
         else if (lengthCactus > 0 && lengthPterodactyl === 0) {
-            return (this.obstaclesCactus[lengthCactus - 1].position.x +
-                this.obstaclesCactus[lengthCactus - 1].size.width);
+            return (this.obstaclesCactus[lengthCactus - 1].getPositionX() +
+                this.obstaclesCactus[lengthCactus - 1].getWidth());
         }
         else if (lengthCactus === 0 && lengthPterodactyl > 0) {
-            return (this.obstaclesPTerodactyl[lengthPterodactyl - 1].position.x +
-                this.obstaclesPTerodactyl[lengthPterodactyl - 1].size.width);
+            return (this.obstaclesPTerodactyl[lengthPterodactyl - 1].getPositionX() +
+                this.obstaclesPTerodactyl[lengthPterodactyl - 1].getWidth());
         }
         return 0;
     };
+    //delete Obstacles when Obstacles have x < 0
     ScenesPlay.prototype.decreaseObstacles = function () {
         if (this.obstaclesCactus.length > 0) {
-            if (this.obstaclesCactus[0].position.x +
-                this.obstaclesCactus[0].size.width <
+            if (this.obstaclesCactus[0].getPositionX() +
+                this.obstaclesCactus[0].getWidth() <
                 0) {
                 this.obstaclesCactus[0].destroy();
                 this.obstaclesCactus.splice(0, 1);
             }
         }
         if (this.obstaclesPTerodactyl.length > 0) {
-            if (this.obstaclesPTerodactyl[0].position.x +
-                this.obstaclesPTerodactyl[0].size.width <
+            if (this.obstaclesPTerodactyl[0].getPositionX() +
+                this.obstaclesPTerodactyl[0].getWidth() <
                 0) {
                 this.obstaclesPTerodactyl[0].destroy();
                 this.obstaclesPTerodactyl.splice(0, 1);
             }
         }
     };
+    //
     ScenesPlay.prototype.updatePositionObstacles = function () {
         var _this = this;
         var lengthCactus = this.obstaclesCactus.length;
         var lengthPterodactyl = this.obstaclesPTerodactyl.length;
         if (lengthCactus > 0) {
-            this.obstaclesCactus.forEach(function (_e) { return (_e.position.x = _this.velocity + _e.position.x); });
+            this.obstaclesCactus.forEach(function (_e) {
+                return _e.setPositionX(_this.velocity + _e.getPositionX());
+            });
         }
         if (lengthPterodactyl > 0) {
-            this.obstaclesPTerodactyl.forEach(function (_e) { return (_e.position.x = _this.velocity + _e.position.x - 1); });
+            this.obstaclesPTerodactyl.forEach(function (_e) {
+                return _e.setPositionX(_this.velocity + _e.getPositionX() - 1);
+            });
         }
     };
     //update Player Jump
@@ -428,20 +443,23 @@ var ScenesPlay = /** @class */ (function (_super) {
             }
         }
     };
+    //
     ScenesPlay.prototype.updateCloud = function () {
         var _this = this;
         if (this.arrCloud.length > 0) {
-            this.arrCloud.forEach(function (_e) { return (_e.position.x += _this.velocity); });
+            this.arrCloud.forEach(function (_e) {
+                return _e.setPositionX(_this.velocity + _e.getPositionX());
+            });
             if (this.arrCloud.length < this.maxCloud &&
-                this.arrCloud[this.arrCloud.length - 1].position.x +
-                    this.arrCloud[this.arrCloud.length - 1].size.width <
+                this.arrCloud[this.arrCloud.length - 1].getPositionX() +
+                    this.arrCloud[this.arrCloud.length - 1].getWidth() <
                     this.getRandom(500, 800)) {
                 var width = this.getRandom(40, 100);
                 var y = this.getRandom(40, 250);
                 var _cloud = this.game.add.imageSprite(800, y, width, width / 1.5, "mainSprite", "cloud");
                 this.arrCloud.push(_cloud);
             }
-            if (this.arrCloud[0].position.x + this.arrCloud[0].size.width < 0) {
+            if (this.arrCloud[0].getPositionX() + this.arrCloud[0].getWidth() < 0) {
                 this.arrCloud[0].destroy();
                 this.arrCloud.splice(0, 1);
             }
@@ -453,6 +471,7 @@ var ScenesPlay = /** @class */ (function (_super) {
             this.arrCloud.push(_cloud);
         }
     };
+    //
     ScenesPlay.prototype.handleCollision = function () {
         if (this.obstaclesCactus.length > 0) {
             if (this.collectionDetection(this.player, this.obstaclesCactus[0])) {
@@ -467,6 +486,7 @@ var ScenesPlay = /** @class */ (function (_super) {
             }
         }
     };
+    //
     ScenesPlay.prototype.getRandom = function (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };

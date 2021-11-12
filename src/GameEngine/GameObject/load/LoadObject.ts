@@ -7,32 +7,30 @@ export default class LoadObject {
   constructor(game: Game) {
     this.game = game;
   }
-  image(nameImage: string, url: string) {
+  image(nameImage: string, url: string): void {
     let _imageTemp = new ImageObject();
-    _imageTemp.image.src = url;
-    _imageTemp.nameImage = nameImage;
+    _imageTemp.setImage(url);
+    _imageTemp.setNameImage(nameImage);
     this.game.arrayImage.push(_imageTemp);
-
-    return _imageTemp;
   }
   imageSprite(
     nameImage: string,
     url: string,
     frameInSprite: Array<IFrameInSprite>
-  ) {
+  ): void {
     let _imageSpriteTemp = new ImageSpriteObject(this.game);
-    _imageSpriteTemp.nameImage = nameImage;
-    _imageSpriteTemp.image.src = url;
-    _imageSpriteTemp.frameInSprite = frameInSprite;
+    _imageSpriteTemp.setNameImage(nameImage);
+    _imageSpriteTemp.setImage(url);
+    _imageSpriteTemp.setFrameInSprite(frameInSprite);
     this.game.arrayImageSprite.push(_imageSpriteTemp);
   }
   addConfigImageSprite(
     nameImage: string,
     frameInSprite: Array<IFrameInSprite>
-  ) {
+  ): void {
     if (this.game.arrayImageSprite.length > 0) {
       this.game.arrayImageSprite.forEach((_e) => {
-        if (_e.nameImage === nameImage) {
+        if (_e.getNameImage() === nameImage) {
           _e.frameInSprite.push(...frameInSprite);
         }
       });

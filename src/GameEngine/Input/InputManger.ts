@@ -14,7 +14,7 @@ export default class InputManager {
     this.keyboard = new KeyBoardManager(this);
     this.mouse = new MouseManager(this);
   }
-  destroy() {
+  destroy(): void {
     this.keyboard.destroy();
     this.mouse.destroy();
   }

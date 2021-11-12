@@ -16,7 +16,7 @@ var Scene = /** @class */ (function () {
     Scene.prototype.update = function () { };
     Scene.prototype.collectionDetection = function (player, obstacles) {
         if (player && obstacles) {
-            var playerSize = player.size, playerPosition = player.position, obstaclesSize = obstacles.size, obstaclesPosition = obstacles.position;
+            var playerSize = player.getSize(), playerPosition = player.getPosition(), obstaclesSize = obstacles.getSize(), obstaclesPosition = obstacles.getPosition();
             if (playerPosition.x < obstaclesPosition.x + obstaclesSize.width &&
                 playerPosition.x + playerSize.width > obstaclesPosition.x &&
                 playerPosition.y < obstaclesPosition.y + obstaclesSize.height &&

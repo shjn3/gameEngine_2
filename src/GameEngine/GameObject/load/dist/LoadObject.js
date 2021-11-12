@@ -8,23 +8,22 @@ var LoadObject = /** @class */ (function () {
     }
     LoadObject.prototype.image = function (nameImage, url) {
         var _imageTemp = new ImageObject_1["default"]();
-        _imageTemp.image.src = url;
-        _imageTemp.nameImage = nameImage;
+        _imageTemp.setImage(url);
+        _imageTemp.setNameImage(nameImage);
         this.game.arrayImage.push(_imageTemp);
-        return _imageTemp;
     };
     LoadObject.prototype.imageSprite = function (nameImage, url, frameInSprite) {
         var _imageSpriteTemp = new ImageSpriteObject_1["default"](this.game);
-        _imageSpriteTemp.nameImage = nameImage;
-        _imageSpriteTemp.image.src = url;
-        _imageSpriteTemp.frameInSprite = frameInSprite;
+        _imageSpriteTemp.setNameImage(nameImage);
+        _imageSpriteTemp.setImage(url);
+        _imageSpriteTemp.setFrameInSprite(frameInSprite);
         this.game.arrayImageSprite.push(_imageSpriteTemp);
     };
     LoadObject.prototype.addConfigImageSprite = function (nameImage, frameInSprite) {
         if (this.game.arrayImageSprite.length > 0) {
             this.game.arrayImageSprite.forEach(function (_e) {
                 var _a;
-                if (_e.nameImage === nameImage) {
+                if (_e.getNameImage() === nameImage) {
                     (_a = _e.frameInSprite).push.apply(_a, frameInSprite);
                 }
             });

@@ -2,37 +2,8 @@ import Game from "../../Game/Game";
 import type { IConfigImageAnimation } from "../../utils/type";
 import BaseObject from "../base/BaseObject";
 
-interface IImageAnimationObject {
-  isVisible: boolean;
-  key: number;
-  nameAnimation: string;
-  indexFrame: number;
-  timer: number;
-  configAnimation: IConfigImageAnimation;
-
-  getNameAnimation: () => string;
-  setNameAnimation: (nameAnimation: string) => void;
-
-  setIsVisible: (isVisible: boolean) => void;
-  getIsVisible: () => boolean;
-
-  setKey: (key: number) => void;
-  getKey: () => number;
-
-  setIndexFrame: (indexFrame: number) => void;
-  getIndexFrame: () => number;
-
-  setTimer: (timer: number) => void;
-  getTimer: () => number;
-
-  play: (nameAnimation: string) => void;
-  destroy: () => void;
-}
-
 export default class ImageAnimationObject extends BaseObject {
-  isVisible: boolean = false;
   nameAnimation: string = "";
-  key: number = Math.floor(Math.random() * Date.now());
   indexFrame: number = 0;
   timer: number = 0;
   configAnimation: IConfigImageAnimation;
@@ -53,44 +24,31 @@ export default class ImageAnimationObject extends BaseObject {
       image: new Image(),
     };
   }
-  getTimer() {
+  getTimer(): number {
     return this.timer;
   }
-  setTimer(timer: number) {
+  setTimer(timer: number): void {
     this.timer = timer;
   }
-  getIndexFrame() {
+
+  getIndexFrame(): number {
     return this.indexFrame;
   }
-  setIndexFrame(indexFrame: number) {
+  setIndexFrame(indexFrame: number): void {
     if (this.configAnimation) {
       if (this.configAnimation.frameInSpriteOfAnimation.length > indexFrame)
         this.indexFrame = indexFrame;
     }
   }
 
-  getKey() {
-    return this.key;
-  }
-  setKey(key: number) {
-    this.key = key;
-  }
-
-  getNameAnimation() {
+  getNameAnimation(): string {
     return this.nameAnimation;
   }
-  setNameAnimation(nameAnimation: string) {
+  setNameAnimation(nameAnimation: string): void {
     this.nameAnimation = nameAnimation;
   }
 
-  setIsVisible(isVisible: boolean) {
-    this.isVisible = isVisible;
-  }
-  getIsVisible() {
-    return this.isVisible;
-  }
-
-  play(nameAnimation: string) {
+  play(nameAnimation: string): void {
     if (this.nameAnimation !== nameAnimation) {
       this.isVisible = false;
       this.indexFrame = 0;

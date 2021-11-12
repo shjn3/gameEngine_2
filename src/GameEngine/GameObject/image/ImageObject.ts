@@ -7,4 +7,16 @@ export default class ImageObject extends BaseObject {
     this.nameImage = "";
     this.image = new Image();
   }
+  setImage(url: string | HTMLImageElement): void {
+    typeof url === "string" ? (this.image.src = url) : (this.image = url);
+  }
+  getImage(): HTMLImageElement {
+    return this.image;
+  }
+  setNameImage(nameImage: string): void {
+    this.nameImage = nameImage;
+  }
+  getNameImage(): string {
+    return this.nameImage;
+  }
 }

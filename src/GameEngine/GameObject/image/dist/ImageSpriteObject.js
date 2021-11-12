@@ -24,9 +24,6 @@ var ImageSpriteObject = /** @class */ (function (_super) {
         _this.frameInSprite = [];
         return _this;
     }
-    ImageSpriteObject.prototype.setSourcePositionX = function (x) {
-        this.sourcePosition.x = x;
-    };
     // changeImageSprite(nameImage: string, keyFrame: string) {
     //   if (Load.SArraySpriteSheet.length > 0) {
     //     Load.SArraySpriteSheet.forEach((_e) => {
@@ -71,6 +68,18 @@ var ImageSpriteObject = /** @class */ (function (_super) {
     };
     ImageSpriteObject.prototype.getSourcePosition = function () {
         return this.sourcePosition;
+    };
+    ImageSpriteObject.prototype.setSourcePositionX = function (x) {
+        this.sourcePosition.x = x;
+    };
+    ImageSpriteObject.prototype.getSourcePositionX = function () {
+        return this.sourcePosition.x;
+    };
+    ImageSpriteObject.prototype.setSourcePositionY = function (y) {
+        this.sourcePosition.y = y;
+    };
+    ImageSpriteObject.prototype.getSourcePositionY = function () {
+        return this.sourcePosition.y;
     };
     ImageSpriteObject.prototype.getFrameInSprite = function () {
         return JSON.parse(JSON.stringify(this.frameInSprite));

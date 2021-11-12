@@ -23,6 +23,24 @@ var TextObject = /** @class */ (function (_super) {
         _this._fontSize = 13;
         return _this;
     }
+    TextObject.prototype.getText = function () {
+        return this._text;
+    };
+    TextObject.prototype.setText = function (text) {
+        this._text = text;
+    };
+    TextObject.prototype.getFontFamily = function () {
+        return this._fontFamily;
+    };
+    TextObject.prototype.setFontFamily = function (fontFamily) {
+        this._fontFamily = fontFamily;
+    };
+    TextObject.prototype.getFontSize = function () {
+        return this._fontSize;
+    };
+    TextObject.prototype.setFontSize = function (fontSize) {
+        this._fontSize = fontSize;
+    };
     return TextObject;
 }(BaseObject_1["default"]));
 exports["default"] = TextObject;

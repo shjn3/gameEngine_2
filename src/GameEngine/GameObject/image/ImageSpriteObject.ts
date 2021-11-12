@@ -15,9 +15,6 @@ export default class ImageSpriteObject extends ImageObject {
     this.sourceSize = { width: 0, height: 0 };
     this.frameInSprite = [];
   }
-  setSourcePositionX(x: number) {
-    this.sourcePosition.x = x;
-  }
 
   // changeImageSprite(nameImage: string, keyFrame: string) {
   //   if (Load.SArraySpriteSheet.length > 0) {
@@ -66,6 +63,18 @@ export default class ImageSpriteObject extends ImageObject {
   }
   getSourcePosition() {
     return this.sourcePosition;
+  }
+  setSourcePositionX(x: number) {
+    this.sourcePosition.x = x;
+  }
+  getSourcePositionX() {
+    return this.sourcePosition.x;
+  }
+  setSourcePositionY(y: number) {
+    this.sourcePosition.y = y;
+  }
+  getSourcePositionY() {
+    return this.sourcePosition.y;
   }
   getFrameInSprite() {
     return JSON.parse(JSON.stringify(this.frameInSprite));

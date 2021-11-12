@@ -36,7 +36,6 @@ export default class ScenesStart extends Scene {
     this.game.add.text(320, 270, "Click to start", "Arial", 30);
     this.game.add.image(350, 150, 100, 100, "btnStart");
     this.game.add.imageSprite(0, 320, 1600, 30, "mainSprite", "ground");
-    //draw dinos
     this.game.add.imageSprite(15, 282, 60, 70, "mainSprite", "dinos");
     this.game.input.mouse.addClick((e: MouseEvent) => this.handleClickStart(e));
   }

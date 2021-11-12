@@ -42,17 +42,17 @@ export default class Game {
     });
     this.init();
   }
-  init() {
+  init(): void {
     this.arrayScenes[0].active();
     this.loop();
   }
-  loop() {
+  loop(): void {
     this.input.update();
     this.arrayScenes[this.indexScenesVisible].update();
     this.renderer.render();
     window.requestAnimationFrame(() => this.loop());
   }
-  changeScenes(nameScenes: string, data?: any, reset: boolean = true) {
+  changeScenes(nameScenes: string, data?: any, reset: boolean = true): void {
     if (this.arrayScenes.length > 1) {
       this.arrayScenes.forEach((_e, index) => {
         if (_e.nameScene === nameScenes) {

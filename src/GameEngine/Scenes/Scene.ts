@@ -10,19 +10,19 @@ export default class Scene {
     this.game = game;
     this.preload();
   }
-  init(data?: any) {}
-  active() {
+  init(data?: any): void {}
+  active(): void {
     this.create();
   }
-  preload() {}
-  create() {}
-  update() {}
-  collectionDetection(player: BaseObject, obstacles: BaseObject) {
+  preload(): void {}
+  create(): void {}
+  update(): void {}
+  collectionDetection(player: BaseObject, obstacles: BaseObject): boolean {
     if (player && obstacles) {
-      let playerSize = player.size,
-        playerPosition = player.position,
-        obstaclesSize = obstacles.size,
-        obstaclesPosition = obstacles.position;
+      let playerSize = player.getSize(),
+        playerPosition = player.getPosition(),
+        obstaclesSize = obstacles.getSize(),
+        obstaclesPosition = obstacles.getPosition();
       if (
         playerPosition.x < obstaclesPosition.x + obstaclesSize.width &&
         playerPosition.x + playerSize.width > obstaclesPosition.x &&

@@ -164,6 +164,7 @@ export default class ScenesPlay extends Scene {
     this.createScore();
     this.createEvent();
   }
+  //create Score
   createScore() {
     for (let i = 0; i < 5; i++) {
       this.arrayUnitScore.push(
@@ -195,6 +196,7 @@ export default class ScenesPlay extends Scene {
     }
     this.updateUnit(this.heightScore, this.arrayUnitHeightScore);
   }
+  //create ground
   createGround() {
     this.arrGround.push(
       this.game.add.imageSprite(0, 320, 1600, 30, "mainSprite", "ground")
@@ -203,7 +205,7 @@ export default class ScenesPlay extends Scene {
       this.game.add.imageSprite(1600, 320, 1600, 30, "mainSprite", "ground")
     );
   }
-
+  //create Player
   createPlayer() {
     this.player = this.game.add.spriteSheet(15, 290, 60, 70);
 
@@ -249,9 +251,8 @@ export default class ScenesPlay extends Scene {
     this.game.animation.create(configDiePlayer);
     this.player.play("RunPlayer");
   }
+  //create Event
   createEvent() {
-    //add event
-
     this.game.input.keyboard.addKeyDown(" ", () => {
       if (this.player.nameAnimation === "RunPlayer")
         this.player.play("JumpPlayer");
@@ -262,21 +263,22 @@ export default class ScenesPlay extends Scene {
     });
     this.game.input.keyboard.addKeyDown("ArrowDown", () => {
       if (this.player.nameAnimation === "RunPlayer") {
-        this.player.position.y = 295;
-        this.player.size.width = 70;
-        this.player.size.height = 55;
+        this.player.setPositionY(295);
+        this.player.setWidth(70);
+        this.player.setHeight(55);
         this.player.play("DuckPlayer");
       }
     });
     this.game.input.keyboard.addKeyUp("ArrowDown", () => {
       if (this.player.nameAnimation === "DuckPlayer") {
-        this.player.position.y = 290;
-        this.player.size.width = 60;
-        this.player.size.height = 70;
+        this.player.setPositionY(290);
+        this.player.setWidth(60);
+        this.player.setHeight(70);
         this.player.play("RunPlayer");
       }
     });
   }
+  //create Obstacles
   createObstacles() {
     let configObstaclesPterodactyl = {
       key: "PTerodactyl",
@@ -311,7 +313,7 @@ export default class ScenesPlay extends Scene {
       this.updateOverGame();
     }
   }
-  updateHeightScore() {}
+  //update Image Unit for Score and hight score
   updateUnit(valueScore: number, arrayScore: Array<ImageSpriteObject>) {
     let temp = valueScore.toString().split("");
     let lengthTemp = temp.length;
@@ -326,6 +328,7 @@ export default class ScenesPlay extends Scene {
       }
     }
   }
+  //update Game Over
   updateOverGame() {
     this.updateHeightScoreValue();
     this.game.changeScenes(
@@ -351,11 +354,16 @@ export default class ScenesPlay extends Scene {
     this.score = 0;
     this.timer = 0;
   }
+  //update Ground
   updateGround() {
     if (this.arrGround.length > 0) {
-      this.arrGround[0].position.x += this.velocity;
-      this.arrGround[1].position.x += this.velocity;
-      if (this.arrGround[0].position.x < -1600) {
+      this.arrGround[0].setPositionX(
+        this.arrGround[0].getPositionX() + this.velocity
+      );
+      this.arrGround[1].setPositionX(
+        this.arrGround[1].getPositionX() + this.velocity
+      );
+      if (this.arrGround[0].getPositionX() < -1600) {
         this.arrGround[0].destroy();
         this.arrGround.splice(0, 1);
         this.arrGround.push(
@@ -364,10 +372,11 @@ export default class ScenesPlay extends Scene {
       }
     }
   }
-
+  //update HeightScore value
   updateHeightScoreValue() {
     this.heightScore = Math.max(this.heightScore, this.score);
   }
+  //update Score value
   updateScoreValue() {
     this.timer++;
     if (this.timer > 50) {
@@ -379,12 +388,12 @@ export default class ScenesPlay extends Scene {
   updateObstacles() {
     this.updatePositionObstacles();
 
-    let getSumPositionAndWidthLastObstacles =
-      this.getSumPositionAndWidthLastObstacles();
+    let sumPositionAndWidthLastObstacles =
+      this.sumPositionAndWidthLastObstacles();
 
     let randomGap = this.getRandom(300, 600);
 
-    if (getSumPositionAndWidthLastObstacles + randomGap < 800) {
+    if (sumPositionAndWidthLastObstacles + randomGap < 800) {
       let randomType = this.getRandom(1, 2); //1 cactus 2 pterodactyl
       switch (randomType) {
         case 1:
@@ -433,34 +442,36 @@ export default class ScenesPlay extends Scene {
     }
     this.decreaseObstacles();
   }
-  getSumPositionAndWidthLastObstacles() {
+  //
+  sumPositionAndWidthLastObstacles() {
     let lengthCactus = this.obstaclesCactus.length;
     let lengthPterodactyl = this.obstaclesPTerodactyl.length;
     if (lengthCactus > 0 && lengthPterodactyl > 0) {
       return Math.max(
-        this.obstaclesCactus[lengthCactus - 1].position.x +
-          this.obstaclesCactus[lengthCactus - 1].size.width,
-        this.obstaclesPTerodactyl[lengthPterodactyl - 1].position.x +
-          this.obstaclesPTerodactyl[lengthPterodactyl - 1].size.width
+        this.obstaclesCactus[lengthCactus - 1].getPositionX() +
+          this.obstaclesCactus[lengthCactus - 1].getWidth(),
+        this.obstaclesPTerodactyl[lengthPterodactyl - 1].getPositionX() +
+          this.obstaclesPTerodactyl[lengthPterodactyl - 1].getWidth()
       );
     } else if (lengthCactus > 0 && lengthPterodactyl === 0) {
       return (
-        this.obstaclesCactus[lengthCactus - 1].position.x +
-        this.obstaclesCactus[lengthCactus - 1].size.width
+        this.obstaclesCactus[lengthCactus - 1].getPositionX() +
+        this.obstaclesCactus[lengthCactus - 1].getWidth()
       );
     } else if (lengthCactus === 0 && lengthPterodactyl > 0) {
       return (
-        this.obstaclesPTerodactyl[lengthPterodactyl - 1].position.x +
-        this.obstaclesPTerodactyl[lengthPterodactyl - 1].size.width
+        this.obstaclesPTerodactyl[lengthPterodactyl - 1].getPositionX() +
+        this.obstaclesPTerodactyl[lengthPterodactyl - 1].getWidth()
       );
     }
     return 0;
   }
+  //delete Obstacles when Obstacles have x < 0
   decreaseObstacles() {
     if (this.obstaclesCactus.length > 0) {
       if (
-        this.obstaclesCactus[0].position.x +
-          this.obstaclesCactus[0].size.width <
+        this.obstaclesCactus[0].getPositionX() +
+          this.obstaclesCactus[0].getWidth() <
         0
       ) {
         this.obstaclesCactus[0].destroy();
@@ -470,8 +481,8 @@ export default class ScenesPlay extends Scene {
 
     if (this.obstaclesPTerodactyl.length > 0) {
       if (
-        this.obstaclesPTerodactyl[0].position.x +
-          this.obstaclesPTerodactyl[0].size.width <
+        this.obstaclesPTerodactyl[0].getPositionX() +
+          this.obstaclesPTerodactyl[0].getWidth() <
         0
       ) {
         this.obstaclesPTerodactyl[0].destroy();
@@ -479,18 +490,19 @@ export default class ScenesPlay extends Scene {
       }
     }
   }
+  //
   updatePositionObstacles() {
     let lengthCactus = this.obstaclesCactus.length;
     let lengthPterodactyl = this.obstaclesPTerodactyl.length;
 
     if (lengthCactus > 0) {
-      this.obstaclesCactus.forEach(
-        (_e) => (_e.position.x = this.velocity + _e.position.x)
+      this.obstaclesCactus.forEach((_e) =>
+        _e.setPositionX(this.velocity + _e.getPositionX())
       );
     }
     if (lengthPterodactyl > 0) {
-      this.obstaclesPTerodactyl.forEach(
-        (_e) => (_e.position.x = this.velocity + _e.position.x - 1)
+      this.obstaclesPTerodactyl.forEach((_e) =>
+        _e.setPositionX(this.velocity + _e.getPositionX() - 1)
       );
     }
   }
@@ -506,13 +518,16 @@ export default class ScenesPlay extends Scene {
       }
     }
   }
+  //
   updateCloud() {
     if (this.arrCloud.length > 0) {
-      this.arrCloud.forEach((_e) => (_e.position.x += this.velocity));
+      this.arrCloud.forEach((_e) =>
+        _e.setPositionX(this.velocity + _e.getPositionX())
+      );
       if (
         this.arrCloud.length < this.maxCloud &&
-        this.arrCloud[this.arrCloud.length - 1].position.x +
-          this.arrCloud[this.arrCloud.length - 1].size.width <
+        this.arrCloud[this.arrCloud.length - 1].getPositionX() +
+          this.arrCloud[this.arrCloud.length - 1].getWidth() <
           this.getRandom(500, 800)
       ) {
         let width = this.getRandom(40, 100);
@@ -527,7 +542,7 @@ export default class ScenesPlay extends Scene {
         );
         this.arrCloud.push(_cloud);
       }
-      if (this.arrCloud[0].position.x + this.arrCloud[0].size.width < 0) {
+      if (this.arrCloud[0].getPositionX() + this.arrCloud[0].getWidth() < 0) {
         this.arrCloud[0].destroy();
         this.arrCloud.splice(0, 1);
       }
@@ -545,6 +560,7 @@ export default class ScenesPlay extends Scene {
       this.arrCloud.push(_cloud);
     }
   }
+  //
   handleCollision() {
     if (this.obstaclesCactus.length > 0) {
       if (this.collectionDetection(this.player, this.obstaclesCactus[0])) {
@@ -559,6 +575,7 @@ export default class ScenesPlay extends Scene {
       }
     }
   }
+  //
   getRandom(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }

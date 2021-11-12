@@ -18,9 +18,7 @@ var ImageAnimationObject = /** @class */ (function (_super) {
     __extends(ImageAnimationObject, _super);
     function ImageAnimationObject(game) {
         var _this = _super.call(this) || this;
-        _this.isVisible = false;
         _this.nameAnimation = "";
-        _this.key = Math.floor(Math.random() * Date.now());
         _this.indexFrame = 0;
         _this.timer = 0;
         _this.game = game;
@@ -53,23 +51,11 @@ var ImageAnimationObject = /** @class */ (function (_super) {
                 this.indexFrame = indexFrame;
         }
     };
-    ImageAnimationObject.prototype.getKey = function () {
-        return this.key;
-    };
-    ImageAnimationObject.prototype.setKey = function (key) {
-        this.key = key;
-    };
     ImageAnimationObject.prototype.getNameAnimation = function () {
         return this.nameAnimation;
     };
     ImageAnimationObject.prototype.setNameAnimation = function (nameAnimation) {
         this.nameAnimation = nameAnimation;
-    };
-    ImageAnimationObject.prototype.setIsVisible = function (isVisible) {
-        this.isVisible = isVisible;
-    };
-    ImageAnimationObject.prototype.getIsVisible = function () {
-        return this.isVisible;
     };
     ImageAnimationObject.prototype.play = function (nameAnimation) {
         if (this.nameAnimation !== nameAnimation) {

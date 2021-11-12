@@ -23,28 +23,32 @@ export default class RectangleObject extends ShapeObject implements IRectangle {
   constructor() {
     super();
   }
-  setSize(width: number, height: number) {
+
+  setSize(width: number, height: number): void {
     this.size = { width, height };
   }
-  getSize() {
+  getSize(): ISize {
     return this.size;
   }
-  getColor() {
+
+  getColor(): string {
     return this.color;
   }
-  setColor(color: string) {
+  setColor(color: string): void {
     this.color = color;
   }
-  getIsFillReact() {
+
+  getIsFillReact(): boolean {
     return this.isFillReact;
   }
-  setIsFillReact(isFillReact: boolean) {
+  setIsFillReact(isFillReact: boolean): void {
     this.isFillReact = isFillReact;
   }
-  setIsVisible(isVisible: boolean) {
+
+  setIsVisible(isVisible: boolean): void {
     this.isVisible = isVisible;
   }
-  getIsVisible() {
+  getIsVisible(): boolean {
     return this.isVisible;
   }
 }

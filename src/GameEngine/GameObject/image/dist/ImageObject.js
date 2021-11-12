@@ -22,6 +22,18 @@ var ImageObject = /** @class */ (function (_super) {
         _this.image = new Image();
         return _this;
     }
+    ImageObject.prototype.setImage = function (url) {
+        typeof url === "string" ? (this.image.src = url) : (this.image = url);
+    };
+    ImageObject.prototype.getImage = function () {
+        return this.image;
+    };
+    ImageObject.prototype.setNameImage = function (nameImage) {
+        this.nameImage = nameImage;
+    };
+    ImageObject.prototype.getNameImage = function () {
+        return this.nameImage;
+    };
     return ImageObject;
 }(BaseObject_1["default"]));
 exports["default"] = ImageObject;

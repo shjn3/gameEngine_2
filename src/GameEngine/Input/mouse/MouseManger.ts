@@ -6,11 +6,11 @@ export default class MouseManager {
   constructor(inputManger: InputManager) {
     this.input = inputManger;
   }
-  addClick(callback: (e: MouseEvent) => void) {
+  addClick(callback: (e: MouseEvent) => void): void {
     this.input.game.renderer.canvas.addEventListener("click", callback);
     this.arrayOnClick.push(callback);
   }
-  destroy() {
+  destroy(): void {
     if (this.arrayOnClick.length > 0) {
       this.arrayOnClick.forEach((_e) => {
         this.input.game.renderer.canvas.removeEventListener("click", _e, false);

@@ -1,36 +1,26 @@
 import type { IPosition } from "../../utils/type";
-interface IShape {
-  position: IPosition;
-  getPosition(): IPosition;
-  setPosition(x: number, y: number): void;
 
-  setPositionX(x: number): void;
-  getPositionX(): number;
-
-  setPositionY(y: number): void;
-  getPositionY(): void;
-}
-export default class ShapeObject implements IShape {
+export default class ShapeObject {
   position: IPosition = { x: 0, y: 0 };
   constructor() {}
-  getPosition() {
+  getPosition(): IPosition {
     return this.position;
   }
-  setPosition(x: number, y: number) {
+  setPosition(x: number, y: number): void {
     this.position = { x, y };
   }
 
-  setPositionX(x: number) {
+  setPositionX(x: number): void {
     this.position.x = x;
   }
-  getPositionX() {
+  getPositionX(): number {
     return this.position.x;
   }
 
-  setPositionY(y: number) {
+  setPositionY(y: number): void {
     this.position.y = y;
   }
-  getPositionY() {
+  getPositionY(): number {
     return this.position.y;
   }
 }

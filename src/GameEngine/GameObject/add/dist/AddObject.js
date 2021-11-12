@@ -14,9 +14,9 @@ var AddObject = /** @class */ (function () {
         if (fontSize === void 0) { fontSize = 13; }
         var _textTemp = new TextObject_1["default"]();
         _textTemp.position = { x: x, y: y };
-        _textTemp._fontFamily = fontFamily;
-        _textTemp._fontSize = fontSize;
-        _textTemp._text = text;
+        _textTemp.setFontFamily(fontFamily);
+        _textTemp.setFontSize(fontSize);
+        _textTemp.setText(text);
         this.game.arrayDrawText.push(_textTemp);
         return _textTemp;
     };
@@ -25,11 +25,11 @@ var AddObject = /** @class */ (function () {
         var temp = new ImageObject_1["default"]();
         if (_imageAddTemp[0]) {
             var image = _imageAddTemp[0].image;
-            temp.nameImage = nameImage;
-            temp.position = { x: x, y: y };
-            temp.size = { width: width, height: height };
-            temp.isVisible = true;
-            temp.image = image;
+            temp.setNameImage(nameImage);
+            temp.setPosition(x, y);
+            temp.setSize(width, height);
+            temp.setIsVisible(true);
+            temp.setImage(image);
             this.game.arrayDrawImage.push(temp);
         }
         return temp;
@@ -44,10 +44,10 @@ var AddObject = /** @class */ (function () {
                     temp.setFrameInSprite(_imageSpriteConfigTemp);
                     temp.setSourcePosition(_imageSpriteConfigTemp[0].sourcePosition.x, _imageSpriteConfigTemp[0].sourcePosition.y);
                     temp.setSourceSize(_imageSpriteConfigTemp[0].sourceSize.width, _imageSpriteConfigTemp[0].sourceSize.height);
-                    temp.size = { width: width, height: height };
-                    temp.position = { x: x, y: y };
-                    temp.isVisible = true;
-                    temp.image = _imageSpriteAddTemp[0].image;
+                    temp.setSize(width, height);
+                    temp.setPosition(x, y);
+                    temp.setIsVisible(true);
+                    temp.setImage(_imageSpriteAddTemp[0].image);
                     this.game.arrayDrawImageSprite.push(temp);
                 }
             }

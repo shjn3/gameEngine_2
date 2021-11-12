@@ -1,6 +1,5 @@
 import type {
   IConfigAnimation,
-  IConfigImageAnimation,
   IImageAnimation,
   IFrameInSprite,
 } from "../../utils/type";
@@ -25,13 +24,25 @@ export default class AnimationObject {
     };
     this.game = game;
   }
+  getNameAnimation(): string {
+    return this.nameAnimation;
+  }
+  setNameAnimation(nameAnimation: string) {
+    this.nameAnimation = nameAnimation;
+  }
+  setKey(key: number): void {
+    this.key = key;
+  }
+  getKey(): number {
+    return this.key;
+  }
 
-  create(configAnimation: IConfigAnimation) {
+  create(configAnimation: IConfigAnimation): void {
     const { key, frames, frameRate } = configAnimation;
 
     if (this.game.arrayImageSprite.length > 0) {
       let imageFromSpriteSheet = this.game.arrayImageSprite.filter(
-        (_e) => _e.nameImage === frames.nameImage
+        (_e) => _e.getNameImage() === frames.nameImage
       );
       if (imageFromSpriteSheet[0]) {
         let frameInSpriteOfAnimation: Array<IFrameInSprite> = [];

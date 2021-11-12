@@ -17,13 +17,13 @@ export default class AddObject {
     text: string,
     fontFamily: string = "Arial",
     fontSize: number = 13
-  ) {
+  ): TextObject {
     let _textTemp = new TextObject();
 
     _textTemp.position = { x, y };
-    _textTemp._fontFamily = fontFamily;
-    _textTemp._fontSize = fontSize;
-    _textTemp._text = text;
+    _textTemp.setFontFamily(fontFamily);
+    _textTemp.setFontSize(fontSize);
+    _textTemp.setText(text);
     this.game.arrayDrawText.push(_textTemp);
     return _textTemp;
   }
@@ -33,18 +33,18 @@ export default class AddObject {
     width: number,
     height: number,
     nameImage: string
-  ) {
+  ): ImageObject {
     let _imageAddTemp = this.game.arrayImage.filter(
       (_e) => _e.nameImage === nameImage
     );
     let temp = new ImageObject();
     if (_imageAddTemp[0]) {
       let image = <HTMLImageElement>_imageAddTemp[0].image;
-      temp.nameImage = nameImage;
-      temp.position = { x, y };
-      temp.size = { width, height };
-      temp.isVisible = true;
-      temp.image = image;
+      temp.setNameImage(nameImage);
+      temp.setPosition(x, y);
+      temp.setSize(width, height);
+      temp.setIsVisible(true);
+      temp.setImage(image);
       this.game.arrayDrawImage.push(temp);
     }
     return temp;
@@ -56,7 +56,7 @@ export default class AddObject {
     height: number,
     nameImage: string,
     keyFrame: string
-  ) {
+  ): ImageSpriteObject {
     let temp = new ImageSpriteObject(this.game);
     let _imageSpriteAddTemp = this.game.arrayImageSprite.filter(
       (_e) => _e.nameImage === nameImage
@@ -77,17 +77,22 @@ export default class AddObject {
             _imageSpriteConfigTemp[0].sourceSize.width,
             _imageSpriteConfigTemp[0].sourceSize.height
           );
-          temp.size = { width, height };
-          temp.position = { x, y };
-          temp.isVisible = true;
-          temp.image = _imageSpriteAddTemp[0].image;
+          temp.setSize(width, height);
+          temp.setPosition(x, y);
+          temp.setIsVisible(true);
+          temp.setImage(_imageSpriteAddTemp[0].image);
           this.game.arrayDrawImageSprite.push(temp);
         }
       }
     }
     return temp;
   }
-  spriteSheet(x: number, y: number, width: number, height: number) {
+  spriteSheet(
+    x: number,
+    y: number,
+    width: number,
+    height: number
+  ): ImageAnimationObject {
     let _imageAnimation = new ImageAnimationObject(this.game);
     _imageAnimation.position = { x, y };
     _imageAnimation.size = { width, height };
@@ -100,7 +105,7 @@ export default class AddObject {
     width: number,
     height: number,
     color: string
-  ) {
+  ): RectangleObject {
     let temp = new RectangleObject();
     temp.setPosition(x, y);
     temp.setSize(width, height);

@@ -29,7 +29,7 @@ var CanvasRenderer = /** @class */ (function () {
         var _this = this;
         if (this.game.arrayDrawText.length > 0) {
             this.game.arrayDrawText.forEach(function (_e) {
-                var text = _e._text, size = _e._fontSize, font = _e._fontFamily, _a = _e.position, x = _a.x, y = _a.y;
+                var text = _e.getText(), size = _e.getFontSize(), font = _e.getFontFamily(), _a = _e.getPosition(), x = _a.x, y = _a.y;
                 _this.ctx.beginPath();
                 _this.ctx.font = size + "px " + font;
                 _this.ctx.fillText("" + text, x, y);
@@ -40,8 +40,8 @@ var CanvasRenderer = /** @class */ (function () {
         var _this = this;
         if (this.game.arrayDrawImage.length > 0) {
             this.game.arrayDrawImage.forEach(function (_e) {
-                if (_e.isVisible) {
-                    var _image = _e.image, _a = _e.position, x = _a.x, y = _a.y, _b = _e.size, width = _b.width, height = _b.height;
+                if (_e.getIsVisible()) {
+                    var _image = _e.getImage(), _a = _e.getPosition(), x = _a.x, y = _a.y, _b = _e.getSize(), width = _b.width, height = _b.height;
                     _this.ctx.beginPath();
                     _this.ctx.drawImage(_image, x, y, width, height);
                 }
@@ -52,8 +52,8 @@ var CanvasRenderer = /** @class */ (function () {
         var _this = this;
         if (this.game.arrayDrawImageSprite.length > 0) {
             this.game.arrayDrawImageSprite.forEach(function (_e) {
-                if (_e.isVisible) {
-                    var sourcePosition = _e.getSourcePosition(), sourceSize = _e.getSourceSize(), position = _e.position, size = _e.size, image = _e.image;
+                if (_e.getIsVisible()) {
+                    var sourcePosition = _e.getSourcePosition(), sourceSize = _e.getSourceSize(), position = _e.getPosition(), size = _e.getSize(), image = _e.getImage();
                     _this.ctx.beginPath();
                     _this.ctx.drawImage(image, sourcePosition.x, sourcePosition.y, sourceSize.width, sourceSize.height, position.x, position.y, size.width, size.height);
                 }
@@ -64,7 +64,7 @@ var CanvasRenderer = /** @class */ (function () {
         var _this = this;
         if (this.game.arrayDrawImageAnimation.length > 0) {
             this.game.arrayDrawImageAnimation.forEach(function (_e) {
-                if (_e.isVisible) {
+                if (_e.getIsVisible()) {
                     var timer = _e.getTimer(), indexFrame = _e.getIndexFrame();
                     timer++;
                     if (timer > 1000 / _e.configAnimation.frameRate) {
@@ -82,7 +82,7 @@ var CanvasRenderer = /** @class */ (function () {
                     _e.setTimer(timer);
                     var image = _e.configAnimation.image, sourcePosition = _e.configAnimation.frameInSpriteOfAnimation[_e.getIndexFrame()]
                         .sourcePosition, sourceSize = _e.configAnimation.frameInSpriteOfAnimation[_e.getIndexFrame()]
-                        .sourceSize, position = _e.position, size = _e.size;
+                        .sourceSize, position = _e.getPosition(), size = _e.getSize();
                     _this.ctx.drawImage(image, sourcePosition.x, sourcePosition.y, sourceSize.width, sourceSize.height, position.x, position.y, size.width, size.height);
                 }
             });
@@ -93,7 +93,7 @@ var CanvasRenderer = /** @class */ (function () {
         if (this.game.arrayDrawShape.length > 0) {
             this.game.arrayDrawShape.forEach(function (_e) {
                 if (_e instanceof RectangleObject_1["default"]) {
-                    if (_e.isVisible) {
+                    if (_e.getIsVisible()) {
                         var position = _e.getPosition(), size = _e.getSize();
                         _this.ctx.beginPath();
                         _this.ctx.fillStyle = _e.color;

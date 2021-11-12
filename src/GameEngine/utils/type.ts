@@ -7,16 +7,6 @@ export type GameConfig = {
   scenes: any[];
 };
 
-export type Position = {
-  x: number;
-  y: number;
-};
-
-export type Size = {
-  width: number;
-  height: number;
-};
-
 export interface IPosition {
   x: number;
   y: number;

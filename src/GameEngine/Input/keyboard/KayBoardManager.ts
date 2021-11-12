@@ -12,7 +12,7 @@ export default class KeyBoardManager {
   constructor(inputManger: InputManager) {
     this.input = inputManger;
   }
-  addKeyDown(key: string, callback: Function) {
+  addKeyDown(key: string, callback: Function): void {
     let functionKeyDown = (e: KeyboardEvent) => {
       if (e.key === key) {
         callback();
@@ -25,7 +25,7 @@ export default class KeyBoardManager {
       function: functionKeyDown,
     });
   }
-  addKeyUp(key: string, callback: Function) {
+  addKeyUp(key: string, callback: Function): void {
     let functionKeyUp = (e: KeyboardEvent) => {
       if (e.key === key) {
         callback();
@@ -38,7 +38,7 @@ export default class KeyBoardManager {
       function: functionKeyUp,
     });
   }
-  destroy() {
+  destroy(): void {
     if (this.arrayEventListen.length > 0) {
       this.arrayEventListen.forEach((_e) => {
         if (_e.type === _eventListen.KeyDown) {
